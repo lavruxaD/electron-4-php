@@ -1,0 +1,183 @@
+0) запуск ---  npm start  завершить --- CTRL + C
+
+1) Скачать и установить Git:
+https://git-scm.com/downloads
+
+Пуск -> в поиск: cmd (запуск от имени администратора)
+
+md C:\Project
+cd C:\Project
+git clone https://github.com/AJ-TechSoul/ELECTRON-4-PHP
+cd ELECTRON-4-PHP
+
+Удаляем лишнее (по усмотрению):
+- .git
+- .github
+- icons
+- electron4php.jpg
+- index.php
+- LICENSE
+- LICENSE.md
+- README.md
+- php (очистить папку)
+
+Создаем папки /php/tmp/ и /www/
+Добавим иконки: icon.ico, trash.ico
+
+Создать файл: /www/index.php
+
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Настольное приложение</title>
+</head>
+<body>
+	<?php
+	echo '<h1>PHP работает!</h1>';
+	?>
+</body>
+</html>
+
+-------------------------------------
+
+2) Скачать новый версию PHP
+https://windows.php.net/download
+
++ ext
++ libcrypto-1_1.dll
++ libsqlite3.dll
++ libssh2.dll
++ libssl-1_1.dll
++ nghttp2.dll
++ php.exe
++ php8ts.dll
+
+Удаляем лишнее (по усмотрению) [/ext/]:
+- php_dba.dll
+- php_enchant.dll
+- php_gmp.dll
+- php_imap.dll
+- php_intl.dll
+- php_ldap.dll
+- php_mysqli.dll
+- php_oci8_12c.dll
+- php_oci8_19.dll
+- php_odbc.dll
+- php_pdo_firebird.dll
+- php_pdo_mysql.dll
+- php_pdo_oci.dll
+- php_pdo_odbc.dll
+- php_pdo_pgsql.dll
+- php_pgsql.dll
+- php_phpdbg_webhelper.dll
+- php_shmop.dll
+- php_snmp.dll
+- php_sodium.dll
+- php_sysvshm.dll
+- php_xsl.dll
+- php_zend_test.dll
+
+php.ini
+-----------------------------------
+output_buffering = 4096
+expose_php = Off
+
+max_execution_time = 60
+max_input_time = 120
+memory_limit = 256M
+
+error_reporting = E_ALL
+log_errors = On
+error_log = "php/tmp/errors.txt"
+
+variables_order = "GPCS"
+request_order = "GP"
+register_argc_argv = Off
+
+post_max_size = 16M
+sys_temp_dir = "php/tmp"
+upload_tmp_dir = "php/tmp"
+enable_dl = Off
+upload_max_filesize = 4M
+max_file_uploads = 40
+default_socket_timeout = 120
+
+cli_server.color = On
+date.timezone = "Asia/Aqtau"
+
+session.gc_divisor = 1000
+session.sid_bits_per_character = 5
+session.save_path = "php/tmp"
+soap.wsdl_cache_dir = "php/tmp"
+
+zend_extension=opcache
+opcache.file_cache = "php/tmp"
+opcache.cache_id = 1
+opcache.memory_consumption = 32
+
+extension_dir = "ext"
+
+extension=bz2
+extension=com_dotnet
+extension=curl
+extension=exif
+extension=ffi
+extension=fileinfo
+extension=ftp
+extension=gd
+extension=gettext
+extension=mbstring
+extension=openssl
+extension=pdo_sqlite
+extension=soap
+extension=sockets
+extension=sqlite3
+extension=tidy
+-----------------------------------
+
+3) Открыть и изменить файл package.json
+https://www.electronjs.org/releases/stable
+https://www.npmjs.com/package/electron-packager
+https://www.npmjs.com/package/php-server-manager
+
+"name": "MyApp",
+
+4) Открыть и изменить файл main.js
+php: __dirname + "/php/php.exe",
+directory: __dirname + "/www/"
+
+, icon: __dirname + '/icon.ico', autoHideMenuBar: true
+
+5) Скачать и установить Node.js
+https://nodejs.org/en/download/
+
+перезапускать cmd
+проверим: node -v
+
+cd C:\Project\ELECTRON-4-PHP
+
+Установим electron и проверим результат
+npm install && npm start
+
+6) Собираем в exe
+npm install --save-dev @electron-forge/cli
+npx electron-forge import
+npm run make
+
+7) Создадим установщик
+Inno Setup: https://jrsoftware.org/isdl.php#stable
+
+My App
+0.1
+https://batas.kz/
+
+
+Compression=lzma2/ultra
+
+[Tasks]
+; Flags: unchecked
+
+[Icons]
+; IconFilename: {app}\resources\app\icon.ico
+; IconFilename: {app}\resources\app\trash.ico
